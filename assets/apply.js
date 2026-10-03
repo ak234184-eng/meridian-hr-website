@@ -3,6 +3,7 @@
   if (!form) return;
   const select = document.getElementById('application-role');
   const status = document.getElementById('application-status');
+  const button = form.querySelector('button[type="submit"]');
   const requestedId = new URLSearchParams(location.search).get('role');
   fetch('jobs.json').then(response => {
     if (!response.ok) throw new Error('Open positions are unavailable.');
@@ -25,26 +26,26 @@
     select.innerHTML = '<option value="" disabled selected>Could not load open positions</option>';
     status.textContent = 'Please open the careers page or email admin@meridian-hr.in for current roles.';
   });
-  form.addEventListener('submit', event => {
+  form.addEventListener('submit', async event => {
     event.preventDefault();
     if (!form.reportValidity()) return;
-    const data = new FormData(form);
-    const role = select.selectedOptions[0]?.textContent || 'General application';
-    const subject = `Job application — ${role}`;
-    const body = [
-      `Position: ${role}`,
-      `Name: ${data.get('name')}`,
-      `Email: ${data.get('email')}`,
-      `Phone: ${data.get('phone') || 'Not provided'}`,
-      `Current city: ${data.get('city')}`,
-      `Notice period: ${data.get('notice') || 'Not provided'}`,
-      '',
-      'Introduction:',
-      data.get('message') || 'Not provided',
-      '',
-      'I have attached my resume to this email.',
-    ].join('\n');
-    status.textContent = 'Your email draft is opening. Attach your resume before sending.';
-    location.href = `mailto:admin@meridian-hr.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const upload = form.querySelector('input[type="file"]');
+    if (upload?.files[0] && upload.files[0].size > 10 * 1024 * 1024) {
+      status.textContent = 'Resume must be 10 MB or smaller.';
+      return;
+    }
+    button.disabled = true;
+    status.textContent = 'Sending your application…';
+    try {
+      const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+      if (!response.ok) throw new Error('The application could not be sent. Check that file uploads are enabled in Formspree, or email admin@meridian-hr.in.');
+      form.reset();
+      status.textContent = 'Thank you. Your application has been sent to Meridian HR & Staffing.';
+    } catch (error) {
+      status.textContent = error.message || 'Something went wrong. Please email admin@meridian-hr.in.';
+    } finally {
+      button.disabled = false;
+    }
   });
 })();
+

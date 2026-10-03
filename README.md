@@ -31,7 +31,7 @@ The careers page reads active listings from `jobs.json`. Open `admin.html` and c
 
 ## Contact form
 
-The contact and application forms open a prefilled email addressed to `admin@meridian-hr.in`. Visitors review and send it from their own mail app. On the application page, they attach their resume themselves; this site does not upload or retain files. To accept web submissions centrally or collect resume uploads, create a Formspree form, verify the `admin@meridian-hr.in` recipient, choose a plan with file uploads if needed, then add its form endpoint to the forms and update `privacy.html` before publishing. Do not add a fake endpoint or expose private service API keys in frontend code.
+The contact and application forms submit directly to the Formspree endpoint configured in their HTML forms. The application form accepts an optional PDF/DOC/DOCX resume up to 10 MB; file uploads require a Formspree plan that supports uploads. Submissions and any uploaded files are processed under the Formspree account settings, plan limits, and retention policy. Never put a private API key in frontend code.
 
 ## WhatsApp
 
@@ -44,3 +44,4 @@ The contact page and floating shortcut open a chat with the supplied business nu
 ## Content notes
 
 Company service, contact, staffing and registration details were taken from the supplied Meridian presentation and the numbers provided in the request. The two example roles from recruitment profile context are marked inactive because current vacancies were not confirmed. Add only verified openings through the admin workflow. No GST certificate scan, PAN, employee records or candidate resumes are included in the website files. No third-party claims about guaranteed compliance or specific outcome percentages are made.
+

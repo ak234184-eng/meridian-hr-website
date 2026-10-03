@@ -15,7 +15,7 @@
       <div class="container">
         <span class="eyebrow">CAREERS AT MERIDIAN</span>
         <h1>Take the next<br><span>step in your career.</span></h1>
-        <p>Share a few details about yourself. Your email app will open with an application draft for Meridian’s recruitment team.</p>
+        <p>Share your details and apply directly to Meridian’s recruitment team.</p>
         <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><a href="jobs.html">Careers</a><span>/</span><span>Apply</span></div>
       </div>
     </section>
@@ -24,22 +24,23 @@
         <div class="contact-form-wrap apply-form-wrap">
           <span class="eyebrow">APPLICATION DETAILS</span>
           <h2>Introduce <span>yourself.</span></h2>
-          <p>This form does not upload or store a resume. When your email draft opens, attach your resume yourself before sending.</p>
-          <form id="application-form">
+          <p>Complete the form to send your application directly to Meridian. A resume upload is optional.</p>
+          <form id="application-form" action="https://formspree.io/f/xrpbneba" method="POST" enctype="multipart/form-data">
             <label>Position<select id="application-role" name="role" required><option value="" disabled selected>Loading open positions…</option></select></label>
             <label>Your name<input name="name" required autocomplete="name" maxlength="100" placeholder="Your full name"></label>
             <label>Email address<input name="email" required type="email" autocomplete="email" maxlength="150" placeholder="you@example.com"></label>
             <label>Phone number <span class="field-optional">(optional)</span><input name="phone" type="tel" autocomplete="tel" maxlength="30" placeholder="Your contact number"></label>
             <label>Current city<input name="city" required autocomplete="address-level2" maxlength="100" placeholder="City, state"></label>
             <label>Notice period <span class="field-optional">(optional)</span><input name="notice" maxlength="80" placeholder="e.g. Immediate, 30 days"></label>
+            <label>Resume <span class="field-optional">(optional, PDF/DOC/DOCX, up to 10 MB)</span><input name="resume" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"></label>
             <label>Short introduction <span class="field-optional">(optional)</span><textarea name="message" rows="4" maxlength="800" placeholder="Relevant experience or skills"></textarea></label>
-            <label class="consent-check"><input type="checkbox" name="privacy" required><span>I have read the <a href="privacy.html">privacy notice</a> and agree to send these application details to Meridian by email.</span></label>
-            <button class="button button-primary" type="submit">Prepare application email <span>↗</span></button>
-            <p class="form-privacy">Before sending, attach your resume in the email draft. Avoid sending bank details, passwords or identity document numbers.</p>
+            <label class="consent-check"><input type="checkbox" name="privacy" required><span>I have read the <a href="privacy.html">privacy notice</a> and agree to send these application details and any attached resume to Meridian.</span></label>
+            <button class="button button-primary" type="submit">Send application <span>↗</span></button>
+            <p class="form-privacy">Do not send bank details, passwords or identity document numbers. If resume upload is unavailable, email your resume to admin@meridian-hr.in and mention your application.</p>
             <p id="application-status" class="form-privacy" role="status"></p>
           </form>
         </div>
-        <aside class="apply-aside"><span class="eyebrow">YOUR PRIVACY</span><h3>You stay in control.</h3><p>Nothing is sent when you click the button. Review the draft in your own email app and send it when you are ready. Your resume stays on your device until you attach and send it.</p><div class="privacy-note"><b>Recruitment safety</b><p>Apply only through Meridian’s official email address. Do not share payment, banking or password information with anyone claiming to recruit for Meridian.</p></div><a class="text-link" href="mailto:admin@meridian-hr.in?subject=Careers%20at%20Meridian">Email the recruitment team <span>↗</span></a></aside>
+        <aside class="apply-aside"><span class="eyebrow">YOUR PRIVACY</span><h3>You stay in control.</h3><p>Your details are sent to Meridian through Formspree when you submit. Any uploaded resume is processed and stored under the Formspree account settings and limits.</p><div class="privacy-note"><b>Recruitment safety</b><p>Apply only through Meridian’s official email address. Do not share payment, banking or password information with anyone claiming to recruit for Meridian.</p></div><a class="text-link" href="mailto:admin@meridian-hr.in?subject=Careers%20at%20Meridian">Email the recruitment team <span>↗</span></a></aside>
       </div>
     </section>
   </main>
@@ -48,3 +49,4 @@
   <script src="assets/apply.js"></script>
 </body>
 </html>
+

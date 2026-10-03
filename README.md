@@ -9,7 +9,7 @@ Responsive multi-page static website for Meridian HR & Staffing. It is designed 
 - `services.html` — recruitment, staffing, payroll and HR operations
 - `jobs.html` — public careers page, populated from `jobs.json`
 - `contact.html` — contact details and email handoff form
-- `admin.html` — static hiring content editor that downloads an updated `jobs.json`
+- `admin.html` — sign-in route to the GitHub editor for authorized job updates
 
 ## Publish on GitHub Pages
 
@@ -24,7 +24,7 @@ This build includes the supplied brand images in `assets/logo.jpg` and `assets/c
 
 ## Updating open positions
 
-The careers page reads active listings from `jobs.json`. To prepare an update, open `admin.html` on the deployed site, edit the listings and download `jobs.json`; alternatively edit the file directly. Review the contents, replace the root `jobs.json` in GitHub and commit the change. The public page updates when GitHub Pages deploys the commit. A static GitHub Pages site cannot securely authenticate an admin or save private edits to GitHub by itself; repository write access and a GitHub commit are required to publish content. Do not add passwords, access tokens, resumes or employee information to this site.
+The careers page reads active listings from `jobs.json`. Open `admin.html` on the deployed site and continue to GitHub. GitHub requires sign-in and repository write permission before an edit can be committed to `main`; only those authorized commits update the live site. Keep the repository write-access list limited to the site administrator. Public visitors can still read public job listings, but cannot publish a change to them. Do not add passwords, access tokens, resumes or employee information to this site.
 
 ## Contact form
 

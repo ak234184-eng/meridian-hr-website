@@ -10,18 +10,16 @@
     return response.json();
   }).then(jobs => {
     const active = Array.isArray(jobs) ? jobs.filter(job => job.active) : [];
-    select.innerHTML = '<option value="" disabled>Select an open role</option>' + active.map(job => {
+    select.innerHTML = '<option value="" disabled>Select an open role or general application</option>' + active.map(job => {
       const option = document.createElement('option');
       option.value = job.id;
       option.textContent = job.title;
       option.selected = job.id === requestedId;
       return option.outerHTML;
-    }).join('');
-    if (!requestedId || !active.some(job => job.id === requestedId)) select.selectedIndex = 0;
-    if (!active.length) {
-      select.innerHTML = '<option value="" disabled selected>No open positions right now</option>';
-      status.textContent = 'Please check the careers page again later or send the team a general introduction.';
-    }
+    }).join('') + '<option value="general">General application (no specific role)</option>';
+    if (requestedId === 'general') select.value = 'general';
+    else if (!requestedId || !active.some(job => job.id === requestedId)) select.selectedIndex = 0;
+    if (!active.length) status.textContent = 'There are no advertised vacancies today. You can still send a general application for future opportunities.';
   }).catch(() => {
     select.innerHTML = '<option value="" disabled selected>Could not load open positions</option>';
     status.textContent = 'Please open the careers page or email admin@meridian-hr.in for current roles.';

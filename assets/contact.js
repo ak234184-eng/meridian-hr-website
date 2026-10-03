@@ -9,7 +9,7 @@
     event.preventDefault();
     const data = new FormData(form);
     const subject = `Website enquiry — ${data.get('topic')}`;
-    const body = [`Name: ${data.get('name')}`, `Email: ${data.get('email')}`, `Enquiry: ${data.get('topic')}`, '', 'Message:', data.get('message')].join('\n');
+    const body = [`Name: ${data.get('name')}`, `Email: ${data.get('email')}`, `Enquiry: ${data.get('topic')}`, '', 'Message:', data.get('message'), '', 'I have read the privacy notice and agree to send these details to Meridian by email.'].join('\n');
     location.href = `mailto:admin@meridian-hr.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   });
 })();

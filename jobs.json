@@ -7,7 +7,7 @@
     "type": "Project based",
     "summary": "Review and annotate audio content with care, accuracy and consistent attention to detail.",
     "requirements": ["Strong listening and attention to detail", "Comfortable following written annotation guidelines", "Share your language skills and relevant experience in your application"],
-    "active": true
+    "active": false
   },
   {
     "id": "oracle-hyperion",
@@ -17,6 +17,6 @@
     "type": "Full time",
     "summary": "Explore an opportunity supporting Oracle Hyperion planning and enterprise performance management work.",
     "requirements": ["Experience with Oracle Hyperion or related EPM tools", "Clear communication and problem-solving skills", "Include your relevant modules and years of experience"],
-    "active": true
+    "active": false
   }
 ]

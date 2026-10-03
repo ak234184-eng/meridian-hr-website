@@ -8,8 +8,11 @@ Responsive multi-page static website for Meridian HR & Staffing. It is designed 
 - `about.html` — company profile and values
 - `services.html` — recruitment, staffing, payroll and HR operations
 - `jobs.html` — public careers page, populated from `jobs.json`
+- `apply.html` — candidate application email draft; applicants attach a resume themselves
 - `contact.html` — contact details and email handoff form
+- `privacy.html` — website and application privacy notice
 - `admin.html` — sign-in route to the GitHub editor for authorized job updates
+- `.github/workflows/manage-jobs.yml` — authenticated form for adding, editing, closing, or reopening a role
 
 ## Publish on GitHub Pages
 
@@ -24,12 +27,20 @@ This build includes the supplied brand images in `assets/logo.jpg` and `assets/c
 
 ## Updating open positions
 
-The careers page reads active listings from `jobs.json`. Open `admin.html` on the deployed site and continue to GitHub. GitHub requires sign-in and repository write permission before an edit can be committed to `main`; only those authorized commits update the live site. Keep the repository write-access list limited to the site administrator. Public visitors can still read public job listings, but cannot publish a change to them. Do not add passwords, access tokens, resumes or employee information to this site.
+The careers page reads active listings from `jobs.json`. Open `admin.html` and choose **Sign in and manage jobs**. Sign in to the authorized GitHub account, open **Actions → Manage job listings → Run workflow**, choose Add/Edit/Close/Reopen, fill the fields, and run it. The workflow validates the request and opens a pull request with the proposed update. Review and merge that pull request to publish; the merge triggers GitHub Pages deployment. A GitHub account needs repository write access to run the workflow. Keep repository write access limited to the site administrator. Public visitors can read job listings but cannot publish them. Job changes in pull requests may be publicly visible before merge, so never include applicant data or confidential hiring notes.
 
 ## Contact form
 
-The contact form opens a prefilled email addressed to `admin@meridian-hr.in`; the visitor must send it from their own mail app. To accept enquiries in a hosted form inbox or save applications centrally, connect a form service with a published privacy notice or deploy a backend and database.
+The contact and application forms open a prefilled email addressed to `admin@meridian-hr.in`. Visitors review and send it from their own mail app. On the application page, they attach their resume themselves; this site does not upload or retain files. To accept web submissions centrally or collect resume uploads, create a Formspree form, verify the `admin@meridian-hr.in` recipient, choose a plan with file uploads if needed, then add its form endpoint to the forms and update `privacy.html` before publishing. Do not add a fake endpoint or expose private service API keys in frontend code.
+
+## WhatsApp
+
+The contact page and floating shortcut open a chat with the supplied business number, `+91 97167 27058`. Confirm that this number is currently monitored for business and candidate enquiries.
+
+## Search visibility
+
+`sitemap.xml`, `robots.txt`, canonical URLs, social sharing metadata, and homepage organization structured data are included. To monitor Google indexing, sign in to Google Search Console with the business Google account, add and verify `meridian-hr.in` (a domain property can be verified through a DNS record at GoDaddy), then submit `https://meridian-hr.in/sitemap.xml`. Verification and sitemap submission require the site owner’s Google and DNS accounts.
 
 ## Content notes
 
-Company service, contact, staffing and registration details were taken from the supplied Meridian presentation and the numbers provided in the request. The two example job listings come from the supplied recruitment profile context and should be reviewed for current status before publication. No GST certificate scan, PAN, employee records or candidate resumes are included in the website files. No third-party claims about guaranteed compliance or specific outcome percentages are made.
+Company service, contact, staffing and registration details were taken from the supplied Meridian presentation and the numbers provided in the request. The two example roles from recruitment profile context are marked inactive because current vacancies were not confirmed. Add only verified openings through the admin workflow. No GST certificate scan, PAN, employee records or candidate resumes are included in the website files. No third-party claims about guaranteed compliance or specific outcome percentages are made.

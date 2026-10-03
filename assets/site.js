@@ -11,4 +11,15 @@
   }
   const footer = document.getElementById('site-footer');
   if (footer) footer.innerHTML = `<footer class="site-footer"><div class="container footer-main"><div class="footer-brand"><a class="brand brand-footer" href="index.html"><img src="assets/logo.jpg" alt=""><span><b>Meridian</b><small>HR and Staffing</small></span></a><p>Connecting talent. Powering businesses.<br>People-first workforce support, across India.</p><a class="footer-email" href="mailto:admin@meridian-hr.in">admin@meridian-hr.in <span>↗</span></a></div><div class="footer-column"><span class="footer-title">EXPLORE</span><a href="about.html">About Meridian</a><a href="services.html">Our services</a><a href="jobs.html">Careers & open roles</a><a href="contact.html">Contact our team</a></div><div class="footer-column"><span class="footer-title">OUR SERVICES</span><a href="services.html#recruitment">Recruitment</a><a href="services.html#staffing">Contract staffing</a><a href="services.html#payroll">Payroll management</a><a href="services.html#compliance">Compliance support</a></div><div class="footer-contact"><span class="footer-title">SAY HELLO</span><a href="tel:+919716727058">+91 97167 27058</a><span>Delhi NCR · Pan-India support</span></div></div><div class="container footer-bottom"><span>© ${new Date().getFullYear()} Meridian HR & Staffing. All rights reserved.</span><span>Built on trust. Powered by people.</span></div></footer>`;
+  if (footer) footer.querySelector('.footer-bottom span:last-child').insertAdjacentHTML('beforeend', ' <a href="privacy.html">Privacy</a> · <a href="admin.html">Admin</a>');
+  if (!document.querySelector('.whatsapp-float')) {
+    const whatsapp = document.createElement('a');
+    whatsapp.className = 'whatsapp-float';
+    whatsapp.href = 'https://wa.me/919716727058?text=Hello%20Meridian%20HR%20%26%20Staffing%2C%20I%20have%20an%20enquiry.';
+    whatsapp.target = '_blank';
+    whatsapp.rel = 'noopener';
+    whatsapp.setAttribute('aria-label', 'Message Meridian HR and Staffing on WhatsApp');
+    whatsapp.innerHTML = '<span aria-hidden="true">◉</span><b>WhatsApp us</b>';
+    document.body.append(whatsapp);
+  }
 })();

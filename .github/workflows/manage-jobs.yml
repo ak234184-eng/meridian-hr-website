@@ -1,0 +1,99 @@
+name: Manage job listings
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: What would you like to do?
+        type: choice
+        required: true
+        options:
+          - Add a position
+          - Edit a position
+          - Close a position
+          - Reopen a position
+      id:
+        description: Existing job ID for Edit, Close, or Reopen (for example, audio-annotator)
+        type: string
+        required: false
+      title:
+        description: Job title (required for Add and Edit)
+        type: string
+        required: false
+      department:
+        description: Department or team
+        type: string
+        required: false
+      location:
+        description: Work location
+        type: string
+        required: false
+      employment_type:
+        description: Employment type (for example, Full time or Project based)
+        type: string
+        required: false
+      summary:
+        description: Short public description of the role
+        type: string
+        required: false
+      requirements:
+        description: One requirement per line
+        type: string
+        required: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-listings:
+    name: Update public positions
+    if: github.actor == 'ak234184-eng'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Apply the requested update
+        run: node .github/scripts/manage-jobs.mjs
+        env:
+          JOB_OPERATION: ${{ inputs.operation }}
+          JOB_ID: ${{ inputs.id }}
+          JOB_TITLE: ${{ inputs.title }}
+          JOB_DEPARTMENT: ${{ inputs.department }}
+          JOB_LOCATION: ${{ inputs.location }}
+          JOB_TYPE: ${{ inputs.employment_type }}
+          JOB_SUMMARY: ${{ inputs.summary }}
+          JOB_REQUIREMENTS: ${{ inputs.requirements }}
+
+      - name: Prepare the listing update
+        id: prepare
+        run: |
+          if git diff --quiet -- jobs.json; then
+            echo "No changes to review."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add jobs.json
+          git checkout -b "cms/job-listings-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          git commit -m "Prepare job listing update"
+          git push --set-upstream origin HEAD
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Open a review before publishing
+        if: steps.prepare.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPOSITORY: ${{ github.repository }}
+          GH_RUN_ID: ${{ github.run_id }}
+        run: |
+          gh pr create \
+            --repo "$GH_REPOSITORY" \
+            --base main \
+            --head "cms/job-listings-${GH_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+            --title "Review public job listing update" \
+            --body "An authorized administrator requested a job listing change through the hiring workflow. Review the jobs.json diff and merge this pull request to publish it."

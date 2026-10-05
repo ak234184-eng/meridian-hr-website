@@ -6,6 +6,8 @@ const operation = (process.env.JOB_OPERATION || '').trim();
 const id = (process.env.JOB_ID || '').trim();
 const title = (process.env.JOB_TITLE || '').trim();
 const text = name => (process.env[name] || '').trim();
+const experienceRange = text('JOB_EXPERIENCE_RANGE');
+const today = new Date().toISOString().slice(0, 10);
 const requirements = text('JOB_REQUIREMENTS').split(/\r?\n/).map(value => value.trim()).filter(Boolean);
 
 if (!Array.isArray(jobs)) throw new Error('jobs.json must contain a JSON list.');
@@ -23,6 +25,8 @@ if (operation === 'Add a position') {
     location: text('JOB_LOCATION') || 'India',
     type: text('JOB_TYPE') || 'Full time',
     summary: text('JOB_SUMMARY'),
+    experienceRange: experienceRange || 'Not specified',
+    postedDate: today,
     requirements,
     active: true,
   });
@@ -31,7 +35,7 @@ if (operation === 'Add a position') {
   const job = jobs.find(item => item.id === id);
   if (!job) throw new Error(`No position found with ID "${id}".`);
   if (operation === 'Close a position') job.active = false;
-  else if (operation === 'Reopen a position') job.active = true;
+  else if (operation === 'Reopen a position') { job.active = true; job.postedDate = today; }
   else {
     if (!title) throw new Error('Add a job title before publishing.');
     Object.assign(job, {
@@ -40,6 +44,8 @@ if (operation === 'Add a position') {
       location: text('JOB_LOCATION') || 'India',
       type: text('JOB_TYPE') || 'Full time',
       summary: text('JOB_SUMMARY'),
+      experienceRange: experienceRange || job.experienceRange || 'Not specified',
+      postedDate: job.postedDate || today,
       requirements,
     });
   }

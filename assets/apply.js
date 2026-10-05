@@ -20,8 +20,8 @@
     event.preventDefault();
     status.textContent = '';
     status.removeAttribute('data-state');
-    phone.setCustomValidity(/^\\d{10}$/.test(phone.value.trim()) ? '' : 'Enter a phone number with exactly 10 digits.');
-    email.setCustomValidity(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/.test(email.value.trim()) ? '' : 'Enter a valid email address.');
+    phone.setCustomValidity(/^\d{10}$/.test(phone.value.trim()) ? '' : 'Enter a phone number with exactly 10 digits.');
+    email.setCustomValidity(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim()) ? '' : 'Enter a valid email address.');
     if (!form.reportValidity()) {
       status.textContent = 'Please complete all required fields and fix the highlighted errors.';
       status.dataset.state = 'error';

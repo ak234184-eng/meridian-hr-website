@@ -2,33 +2,10 @@
   const form = document.getElementById('application-form');
   if (!form) return;
   const role = document.getElementById('target-role');
-  const fileInput = document.getElementById('resume-file');
   const status = document.getElementById('application-status');
   const button = form.querySelector('button[type="submit"]');
   const phone = form.elements.phone;
   const email = form.elements.email;
-  const maxFileSize = 5 * 1024 * 1024;
-  const allowedExtensions = ['pdf', 'doc', 'docx'];
-  const allowedMimeTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-
-  function validateFile() {
-    const file = fileInput.files[0];
-    if (!file) {
-      fileInput.setCustomValidity('Please attach your resume.');
-      return false;
-    }
-    const extension = file.name.split('.').pop().toLowerCase();
-    if (!allowedExtensions.includes(extension) || (file.type && !allowedMimeTypes.includes(file.type))) {
-      fileInput.setCustomValidity('Upload a PDF, DOC or DOCX file.');
-      return false;
-    }
-    if (file.size > maxFileSize) {
-      fileInput.setCustomValidity('Your resume must be 5 MB or smaller.');
-      return false;
-    }
-    fileInput.setCustomValidity('');
-    return true;
-  }
 
   const requestedRole = new URLSearchParams(location.search).get('role');
   if (requestedRole && requestedRole !== 'general') {
@@ -39,24 +16,18 @@
     }).catch(() => {});
   }
 
-  fileInput.addEventListener('change', () => {
-    validateFile();
-    status.textContent = fileInput.validationMessage || '';
-    status.dataset.state = fileInput.validationMessage ? 'error' : '';
-  });
-
   form.addEventListener('submit', async event => {
     event.preventDefault();
     status.textContent = '';
     status.removeAttribute('data-state');
-    phone.setCustomValidity(/^\d{10}$/.test(phone.value.trim()) ? '' : 'Enter a phone number with exactly 10 digits.');
-    email.setCustomValidity(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim()) ? '' : 'Enter a valid email address.');
-    validateFile();
+    phone.setCustomValidity(/^\\d{10}$/.test(phone.value.trim()) ? '' : 'Enter a phone number with exactly 10 digits.');
+    email.setCustomValidity(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/.test(email.value.trim()) ? '' : 'Enter a valid email address.');
     if (!form.reportValidity()) {
       status.textContent = 'Please complete all required fields and fix the highlighted errors.';
       status.dataset.state = 'error';
       return;
     }
+
     button.disabled = true;
     status.textContent = 'Sending your application…';
     status.dataset.state = 'pending';
@@ -67,7 +38,7 @@
         const apiDetails = Array.isArray(payload?.errors)
           ? payload.errors.map(item => item.message).filter(Boolean).join(' ')
           : (payload?.error || '');
-        const fallback = `Formspree rejected the submission (HTTP ${response.status}). Check that file uploads are enabled for this form, the storage quota is available, and the “resume” field matches any file validation rule.`;
+        const fallback = `Formspree rejected the submission (HTTP ${response.status}). Check the form settings and notification email, or contact admin@meridian-hr.in.`;
         throw new Error((apiDetails || fallback).slice(0, 400));
       }
       form.reset();
@@ -80,7 +51,6 @@
     } finally {
       phone.setCustomValidity('');
       email.setCustomValidity('');
-      fileInput.setCustomValidity('');
       button.disabled = false;
     }
   });

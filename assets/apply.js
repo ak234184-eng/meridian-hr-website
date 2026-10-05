@@ -62,13 +62,20 @@
     status.dataset.state = 'pending';
     try {
       const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
-      if (!response.ok) throw new Error('Your application could not be sent. Please try again or email admin@meridian-hr.in.');
+      const payload = await response.json().catch(() => null);
+      if (!response.ok) {
+        const apiDetails = Array.isArray(payload?.errors)
+          ? payload.errors.map(item => item.message).filter(Boolean).join(' ')
+          : (payload?.error || '');
+        const fallback = `Formspree rejected the submission (HTTP ${response.status}). Check that file uploads are enabled for this form, the storage quota is available, and the “resume” field matches any file validation rule.`;
+        throw new Error((apiDetails || fallback).slice(0, 400));
+      }
       form.reset();
       role.value = '';
       status.textContent = 'Thank you. Your application has been sent to Meridian HR & Staffing.';
       status.dataset.state = 'success';
     } catch (error) {
-      status.textContent = error.message || 'Something went wrong. Please email admin@meridian-hr.in.';
+      status.textContent = error instanceof TypeError ? 'Could not reach the form service. Check your internet connection and try again.' : (error.message || 'Something went wrong. Please email admin@meridian-hr.in.');
       status.dataset.state = 'error';
     } finally {
       phone.setCustomValidity('');

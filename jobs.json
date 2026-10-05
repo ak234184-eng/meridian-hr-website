@@ -6,7 +6,11 @@
     "location": "Delhi NCR",
     "type": "Project based",
     "summary": "Review and annotate audio content with care, accuracy and consistent attention to detail.",
-    "requirements": ["Strong listening and attention to detail", "Comfortable following written annotation guidelines", "Share your language skills and relevant experience in your application"],
+    "requirements": [
+      "Strong listening and attention to detail",
+      "Comfortable following written annotation guidelines",
+      "Share your language skills and relevant experience in your application"
+    ],
     "active": false
   },
   {
@@ -16,7 +20,23 @@
     "location": "India",
     "type": "Full time",
     "summary": "Explore an opportunity supporting Oracle Hyperion planning and enterprise performance management work.",
-    "requirements": ["Experience with Oracle Hyperion or related EPM tools", "Clear communication and problem-solving skills", "Include your relevant modules and years of experience"],
+    "requirements": [
+      "Experience with Oracle Hyperion or related EPM tools",
+      "Clear communication and problem-solving skills",
+      "Include your relevant modules and years of experience"
+    ],
     "active": false
+  },
+  {
+    "id": "area-manager-amazon",
+    "title": "Area Manager - (Amazon)",
+    "department": "Operations",
+    "location": "Delhi (NCR)",
+    "type": "Full Time",
+    "summary": "An Area Manager for an Amazon warehouse transitioning to a role at AVS2 Logistics India Pvt. Ltd. in Delhi oversees fast-paced e-commerce warehousing, sorting, and last-mile/reverse logistics operations.  Public Description Results-driven Logistics and Operations Leader transitioning from Amazon Fulfillment/Delivery operations to AVS2 Logistics India Pvt. Ltd. in Delhi. Proven expertise in managing high-volume warehouse floors, sorting centers, safety compliance, and last-mile e-commerce supply chains. Adept at team leadership, KPI optimization, and driving on-time delivery performance across dynamic urban logistics networks.  Key Responsibilities & Highlights to Include • Operations Leadership: Managing daily shift operations, floor staffing, and workflow execution across Amazon/AVS2 sorting and distribution hubs. • Performance & Metrics: Tracking SLA (Service Level Agreement) compliance, dispatch accuracy, cost control, and turnaround times. • Safety & Compliance: Enforcing workplace safety protocols, labor standards, and inventory reconciliation. • Stakeholder Management: Coordinating with e-commerce clients (such as Amazon and 3PL partners), transport fleets, and regional business heads.",
+    "requirements": [
+      "• Manage and optimize daily warehouse, sorting, and delivery hub operations. • Lead, mentor, and schedule large teams of floor associates and supervisors. • Track and improve operational KPIs, including SLA compliance, dispatch accuracy, and turnaround times. • Coordinate seamless handoffs between inbound processing, sorting, and last-mile delivery networks. • Enforce strict workplace safety standards, labor law compliance, and 5S protocols. • Minimize operational costs while maximizing daily processing and package throughput. • Resolve real-time supply chain bottlenecks, transport delays, and system glitches. • Maintain high inventory accuracy through regular cycle counts and audit compliance. • Collaborate closely with client account managers, fleet operators, and regional headers. • Analyze shift data and performance metrics to implement continuous process improvements."
+    ],
+    "active": true
   }
 ]

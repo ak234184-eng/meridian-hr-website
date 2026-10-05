@@ -1,5 +1,5 @@
 (() => {
-  const navItems = [['index.html', 'Home'], ['about.html', 'About'], ['services.html', 'Services'], ['jobs.html', 'Careers']];
+  const navItems = [['index.html', 'Home'], ['about.html', 'About'], ['services.html', 'Services'], ['jobs.html', 'Careers'], ['insights.html', 'Insights']];
   const header = document.getElementById('site-header');
   if (header) {
     const current = location.pathname.split('/').pop() || 'index.html';
@@ -10,7 +10,7 @@
     nav.addEventListener('click', event => { if (event.target.closest('a')) { nav.classList.remove('nav-open'); toggle.setAttribute('aria-expanded', 'false'); document.body.classList.remove('menu-open'); } });
   }
   const footer = document.getElementById('site-footer');
-  if (footer) footer.innerHTML = `<footer class="site-footer"><div class="container footer-main"><div class="footer-brand"><a class="brand brand-footer" href="index.html"><img src="assets/logo.jpg" alt=""><span><b>Meridian</b><small>HR and Staffing</small></span></a><p>Connecting talent. Powering businesses.<br>People-first workforce support, across India.</p><a class="footer-email" href="mailto:admin@meridian-hr.in">admin@meridian-hr.in <span>↗</span></a></div><div class="footer-column"><span class="footer-title">EXPLORE</span><a href="about.html">About Meridian</a><a href="services.html">Our services</a><a href="jobs.html">Careers & open roles</a><a href="contact.html">Contact our team</a></div><div class="footer-column"><span class="footer-title">OUR SERVICES</span><a href="services.html#recruitment">Recruitment</a><a href="services.html#staffing">Contract staffing</a><a href="services.html#payroll">Payroll management</a><a href="services.html#compliance">Compliance support</a></div><div class="footer-contact"><span class="footer-title">SAY HELLO</span><a href="tel:+919716727058">+91 97167 27058</a><span>Delhi NCR · Pan-India support</span></div></div><div class="container footer-bottom"><span>© ${new Date().getFullYear()} Meridian HR & Staffing. All rights reserved.</span><span>Built on trust. Powered by people.</span></div></footer>`;
+  if (footer) footer.innerHTML = `<footer class="site-footer"><div class="container footer-main"><div class="footer-brand"><a class="brand brand-footer" href="index.html"><img src="assets/logo.jpg" alt=""><span><b>Meridian</b><small>HR and Staffing</small></span></a><p>Connecting talent. Powering businesses.<br>People-first workforce support, across India.</p><a class="footer-email" href="mailto:admin@meridian-hr.in">admin@meridian-hr.in <span>↗</span></a></div><div class="footer-column"><span class="footer-title">EXPLORE</span><a href="about.html">About Meridian</a><a href="services.html">Our services</a><a href="jobs.html">Careers & open roles</a><a href="contact.html">Contact our team</a><a href="insights.html">Workforce insights</a><a href="faq.html">FAQs</a></div><div class="footer-column"><span class="footer-title">OUR SERVICES</span><a href="services.html#recruitment">Recruitment</a><a href="services.html#staffing">Contract staffing</a><a href="services.html#payroll">Payroll management</a><a href="services.html#compliance">Compliance support</a></div><div class="footer-contact"><span class="footer-title">SAY HELLO</span><a href="tel:+919716727058">+91 97167 27058</a><span>Delhi NCR · Pan-India support</span></div></div><div class="container footer-bottom"><span>© ${new Date().getFullYear()} Meridian HR & Staffing. All rights reserved.</span><span>Built on trust. Powered by people.</span></div></footer>`;
   if (footer) footer.querySelector('.footer-bottom span:last-child').insertAdjacentHTML('beforeend', ' <a href="privacy.html">Privacy</a> · <a href="admin.html">Admin</a>');
   if (!document.querySelector('.whatsapp-float')) {
     const whatsapp = document.createElement('a');
@@ -23,3 +23,4 @@
     document.body.append(whatsapp);
   }
 })();
+

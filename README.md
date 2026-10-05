@@ -8,8 +8,11 @@ Responsive multi-page static website for Meridian HR & Staffing. It is designed 
 - `about.html` — company profile and values
 - `services.html` — recruitment, staffing, payroll and HR operations
 - `jobs.html` — public careers page, populated from `jobs.json`
+- `insights.html` plus three article pages — practical hiring, payroll preparation and candidate guidance
+- `faq.html` — employer and candidate frequently asked questions
 - `apply.html` — candidate application email draft; applicants attach a resume themselves
 - `contact.html` — contact details and email handoff form
+- Homepage hiring enquiry form — captures business contact and high-level hiring requirement details
 - `privacy.html` — website and application privacy notice
 - `admin.html` — sign-in route to the GitHub editor for authorized job updates
 - `.github/workflows/manage-jobs.yml` — authenticated form for adding, editing, closing, or reopening a role
@@ -32,6 +35,8 @@ The careers page reads active listings from `jobs.json`. Open `admin.html` and c
 ## Contact form
 
 The contact and application forms submit directly to the Formspree endpoint configured in their HTML forms. The application form accepts an optional PDF/DOC/DOCX resume up to 10 MB; file uploads require a Formspree plan that supports uploads. Submissions and any uploaded files are processed under the Formspree account settings, plan limits, and retention policy. Never put a private API key in frontend code.
+
+The homepage hiring enquiry asks for company name, business contact, role needs, approximate headcount, location and target timeline. It uses the same Formspree endpoint. Do not include candidate records or confidential payroll data in that enquiry form.
 
 ## WhatsApp
 
